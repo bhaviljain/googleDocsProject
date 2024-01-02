@@ -84,7 +84,7 @@ fontFamily.addEventListener("change", (e) => {
 alignment.forEach((alignEle)=>{
     alignEle.addEventListener('click', (e)=>{
         let address = addressbar.value;
-        let [cell, cellprop] = getCellAndCellProp(address);
+        let [cell, cellprop] = getCellAndCellProp(address)
 
         let alignValue = e.target.classList[0];
         cellprop.alignment = alignValue;
