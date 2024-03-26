@@ -33,6 +33,7 @@ for(let i =0; i<row; i++)
         cell.setAttribute("spellcheck" , false)
         cell.setAttribute("class","cell")
         cell.setAttribute("contenteditable", "true")
+        //cell and storage indentfication
         cell.setAttribute('rid', i)
         cell.setAttribute('cid', j)
         rowCount.appendChild(cell)
@@ -50,7 +51,9 @@ cell.addEventListener("click",(e)=> {
 
 })
 }
-
+//default A1 ayega adress bar par
+let firstClick = document.querySelector('.cell')
+firstClick.click()
 
 
 

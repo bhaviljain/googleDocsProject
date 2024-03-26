@@ -31,7 +31,7 @@ let BGcolor = document.querySelector(".BGcolor");
 let alignment = document.querySelectorAll(".alignment")
 let leftAlign = alignment[0]
 let centerAlign = alignment[1]
-let rightAlign = alignment[2]
+let rightAlign =  alignment[2]
 let activeColorProp = "#d1d8e0";
 let inactiveColorProp = "#ecf0f1";
 
@@ -61,7 +61,7 @@ underline.addEventListener("click", (e) => {
 
     // Modification
     cellprop.underline = !cellprop.underline; // Data change
-    cell.style.textDecoration = cellprop.underline ? "underline" : "normal"; // UI change (1)
+    cell.style.textDecoration = cellprop.underline ? "underline" : "none"; // UI change (1)
     underline.style.backgroundColor = cellprop.underline ? activeColorProp : inactiveColorProp; // UI change (2)
 })
 
@@ -92,23 +92,23 @@ alignment.forEach((alignEle)=>{
         // let activeColorProp = "#d1d8e0";
         // let inactiveColorProp = "#ecf0f1";
         switch(alignValue){
+        
             case "left":
-            leftAlign.style.backgroundColor = activeColorProp
-            rightAlignAlign.style.backgroundColor = inactiveColorProp
-            centerAlignAlign.style.backgroundColor = inactiveColorProp
-            break
-
-            case "right":
-                leftAlign.style.backgroundColor = inactiveColorProp
-                rightAlignAlign.style.backgroundColor = activeColorProp
-                centerAlignAlign.style.backgroundColor = inactiveColorProp
-            break
-
+                leftAlign.style.backgroundColor = activeColorProp
+                rightAlign.style.backgroundColor = inactiveColorProp
+                centerAlign.style.backgroundColor = inactiveColorProp
+                break;
             case "center":
                 leftAlign.style.backgroundColor = inactiveColorProp
-                rightAlignAlign.style.backgroundColor = inactiveColorProp
-                centerAlignAlign.style.backgroundColor = activeColorProp
+                rightAlign.style.backgroundColor = inactiveColorProp
+                centerAlign.style.backgroundColor = activeColorProp
                 break;
+
+                    case "right":
+                        leftAlign.style.backgroundColor = inactiveColorProp
+                        rightAlign.style.backgroundColor = activeColorProp
+                        centerAlign.style.backgroundColor = inactiveColorProp
+                    break;
 
         }
 
@@ -118,6 +118,26 @@ alignment.forEach((alignEle)=>{
 
 })
 
+fontcolor.addEventListener("change", (e) => {
+    let address = addressbar.value;
+    let [cell, cellprop] = getCellAndCellProp(address);
+
+    // Modification
+    cellprop.fontcolor = fontcolor.value // Data change
+    cell.style.color = cellprop.fontcolor
+    fontcolor.value = cellprop.fontcolor;
+
+})
+BGcolor.addEventListener("change", (e) => {
+    let address = addressbar.value;
+    let [cell, cellprop] = getCellAndCellProp(address);
+
+    // Modification
+    cellprop.BGcolor = BGcolor.value // Data change
+    cell.style.backgroundColor = cellprop.BGcolor
+    BGcolor.value = cellprop.BGcolor;
+
+})
 
 function getCellAndCellProp(address) {
     let [rid, cid] = decodeRIDCIDFromAddress(address);
@@ -125,13 +145,15 @@ function getCellAndCellProp(address) {
     let cell = document.querySelector(`.cell[rid="${rid}"][cid="${cid}"]`);
     let cellProp = sheetDB[rid][cid];
     return [cell, cellProp];
+    //ui me change hoga thru cell and data mein change hoga thru cellprop
 }
 
 function decodeRIDCIDFromAddress(address) {
-    // address -> "A1"
+    // address -> eg "A1"
     let rid = Number(address.slice(1) - 1); // "1" -> 0
     let cid = Number(address.charCodeAt(0)) - 65; // "A" -> 65
     return [rid, cid];
+    //A-Z is col , 1,2,3, is row
 }
 
 
